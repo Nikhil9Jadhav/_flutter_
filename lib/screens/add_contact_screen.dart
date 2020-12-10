@@ -1,5 +1,5 @@
-import 'package:contact_list_app/helpers/database_helper.dart';
-
+import '../helpers/database_helper.dart';
+import '../constants.dart';
 import '../models/contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -73,24 +73,25 @@ class _AddContactScreenState extends State<AddContactScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Add  Contact"),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-          child: Column(
-            children: <Widget>[
-              Form(
-                key: _addContactFormKey,
-                child: Column(children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextFormField(
-                          style: TextStyle(fontSize: 18.0),
-                          decoration: commonInputDecoration("First Name"),
+        return Scaffold(
+          appBar: AppBar(
+            title: Text("Add  Contact"),
+          ),
+          body: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+              child: Column(
+                children: <Widget>[
+                  Form(
+                    key: _addContactFormKey,
+                    child: Column(children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: TextFormField(
+                              style: contactFormTextSize,
+                          decoration: contactTextFieldDecoration.copyWith(
+                              labelText: "First Name"),
                           validator: (input) => input.trim().isEmpty
                               ? 'First name is required'
                               : null,
@@ -103,8 +104,10 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       ),
                       Expanded(
                         child: TextFormField(
-                          style: TextStyle(fontSize: 18.0),
-                          decoration: commonInputDecoration("Last Name"),
+                          style: contactFormTextSize,
+                          decoration: contactTextFieldDecoration.copyWith(
+                            labelText: "Last Name",
+                          ),
                           validator: (input) => input.trim().isEmpty
                               ? 'Last name is required'
                               : null,
@@ -119,8 +122,10 @@ class _AddContactScreenState extends State<AddContactScreen> {
                   ),
                   //Mobile Number Block
                   TextFormField(
-                    style: TextStyle(fontSize: 18.0),
-                    decoration: commonInputDecoration("Mobile Number"),
+                    style: contactFormTextSize,
+                    decoration: contactTextFieldDecoration.copyWith(
+                      labelText: "Mobile Number",
+                    ),
                     validator: (input) => isValidPhoneNumber(input)
                         ? 'Please enter a valid number'
                         : null,
@@ -133,10 +138,12 @@ class _AddContactScreenState extends State<AddContactScreen> {
                   ),
                   //Address Block
                   TextFormField(
-                    maxLines: 2,
-                    decoration: commonInputDecoration("Address"),
+                    maxLines: 3,
+                    decoration: contactTextFieldDecoration.copyWith(
+                      labelText: "Enter Address details",
+                    ),
                     validator: (input) => input.trim().isEmpty
-                        ? 'Enter the address details'
+                        ? 'Please enter the address details'
                         : null,
                     onSaved: (input) => _address = input,
                     initialValue: _address,
@@ -165,8 +172,10 @@ class _AddContactScreenState extends State<AddContactScreen> {
                               ),
                             );
                           }).toList(),
-                          style: TextStyle(fontSize: 18.0),
-                          decoration: commonInputDecoration("Select City"),
+                          style: contactFormTextSize,
+                          decoration: contactTextFieldDecoration.copyWith(
+                            labelText: "City",
+                          ),
                           validator: (input) => input == null
                               ? 'Please select the city name'
                               : null,
@@ -183,8 +192,10 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       ),
                       Expanded(
                         child: TextFormField(
-                          style: TextStyle(fontSize: 18.0),
-                          decoration: commonInputDecoration("Pin Code"),
+                          style: contactFormTextSize,
+                          decoration: contactTextFieldDecoration.copyWith(
+                            labelText: "Pincode",
+                          ),
                           validator: (input) => isValidPincode(input)
                               ? 'Please enter a valid six digit code'
                               : null,
@@ -204,7 +215,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     children: <Widget>[
                       Text(
                         "Gender :",
-                        style: TextStyle(fontSize: 18.0),
+                        style: contactFormTextSize,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -216,7 +227,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           ),
                           Text(
                             'Male',
-                            style: TextStyle(fontSize: 16.0),
+                            style: contactFormTextSize,
                           ),
                           Radio(
                             value: 1,
@@ -226,7 +237,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           Text(
                             'Female',
                             style: TextStyle(
-                              fontSize: 16.0,
+                              fontSize: 18.0,
                             ),
                           ),
                         ],
@@ -242,7 +253,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     children: <Widget>[
                       Text(
                         "Languages known :",
-                        style: TextStyle(fontSize: 18.0),
+                        style: contactFormTextSize,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -257,7 +268,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           ),
                           Text(
                             'Marathi',
-                            style: TextStyle(fontSize: 16.0),
+                            style: contactFormTextSize,
                           ),
                           //Hindi Checkbox
                           Checkbox(
@@ -268,7 +279,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           Text(
                             'Hindi',
                             style: TextStyle(
-                              fontSize: 16.0,
+                              fontSize: 18.0,
                             ),
                           ),
                           //English Checkbox
@@ -282,7 +293,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           Text(
                             'English',
                             style: TextStyle(
-                              fontSize: 16.0,
+                              fontSize: 18.0,
                             ),
                           )
                         ],
@@ -295,8 +306,10 @@ class _AddContactScreenState extends State<AddContactScreen> {
                   ),
                   TextFormField(
                     readOnly: true,
-                    style: TextStyle(fontSize: 18.0),
-                    decoration: commonInputDecoration("Date of birth"),
+                    style: contactFormTextSize,
+                    decoration: contactTextFieldDecoration.copyWith(
+                      labelText: "Date of birth",
+                    ),
                     controller: _dateController,
                     onTap: _handleDatePicker,
                   ),
@@ -327,27 +340,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
     );
   }
 
-  //Widget Input Decoration
-  InputDecoration commonInputDecoration(String labelTextString) {
-    return InputDecoration(
-      labelText: labelTextString,
-      labelStyle: TextStyle(fontSize: 18.0),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-    );
-  }
-
   //Handling Radio Button
   void toggleRadioButton(int value) {
-    setState(() {
-      _genderCode = value;
-      print(_genderCode);
-    });
-  }
-
-  //Handling Checkbox
-  void toggleCheckboxex(int value) {
     setState(() {
       _genderCode = value;
       print(_genderCode);
@@ -443,26 +437,6 @@ class _AddContactScreenState extends State<AddContactScreen> {
   String getPincodeString(int pinCode) {
     return pinCode.toString() == null ? '' : pinCode.toString();
   }
-
-  //Handling Checkboxes
-  //Used while updating a record.
-  //Takes the string input ,
-  //Converts it into a list,
-  //If the particular checkbox value is available in the list,
-  // sets that checkbox value to be true.
-  // void showLanguagesCheckboxStatus(List<String> knownLanguageList) {
-  //   // if (knownLanguageList.contains("Marathi")) {
-  //   //   _knowsMarathi = true;
-  //   // }
-
-  //   if (knownLanguageList.contains("Hindi")) {
-  //     _knowsHindi = true;
-  //   }
-
-  //   if (knownLanguageList.contains("English")) {
-  //     _knowsEnglish = true;
-  //   }
-  // }
 
   void toggleMarathiStatus(bool value) {
     print("Toggling Marathi Language checkbox");
