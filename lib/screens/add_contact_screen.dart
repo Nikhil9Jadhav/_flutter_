@@ -37,7 +37,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
   String _phoneNumber;
   String _address;
   String _city;
-  int _pincode;
+  String _pincode;
   int _genderCode;
   bool _knowsMarathi = false;
   bool _knowsHindi = false;
@@ -56,7 +56,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
       _phoneNumber = widget.userContact.phNumber;
       _address = widget.userContact.address;
       _city = widget.userContact.city;
-      _pincode = widget.userContact.pincode;
+      _pincode = widget.userContact.pincode.toString();
       _genderCode = widget.userContact.gender == 'Male' ? 0 : 1;
       //Coverting string to list to use it further as checkboxes list for multiple language option
       _languageList = widget.userContact.languagesKnown.split(',');
@@ -188,8 +188,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           validator: (input) => isValidPincode(input)
                               ? 'Please enter a valid six digit code'
                               : null,
-                          onSaved: (input) => _pincode = int.parse(input),
-                          initialValue: getPincodeString(_pincode),
+                          onSaved: (input) => _pincode = input,
+                          initialValue: _pincode,
                           keyboardType: TextInputType.number,
                         ),
                       )
@@ -415,7 +415,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
           phNumber: _phoneNumber,
           address: _address,
           city: _city,
-          pincode: _pincode,
+          pincode: int.parse(_pincode),
           gender: _genderCode == 0 ? "Male" : "Female",
           languagesKnown: join(_languageList),
           birthDate: _date);
