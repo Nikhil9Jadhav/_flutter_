@@ -1,6 +1,7 @@
 import 'package:contact_list_app/helpers/database_helper.dart';
 import 'package:contact_list_app/models/contacts.dart';
 import 'package:flutter/material.dart';
+import 'welcome_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'add_contact_screen.dart';
 
@@ -88,6 +89,17 @@ class _ContactListScreenState extends State<ContactListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Contact List App"),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () {
+                //Implement logout functionality
+                Navigator.pushNamed(context, WelcomeScreen.id);
+              }),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
         child: Icon(Icons.add),

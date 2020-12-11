@@ -1,3 +1,5 @@
+import 'package:contact_list_app/screens/welcome_screen.dart';
+
 import '../helpers/database_helper.dart';
 import '../constants.dart';
 import '../models/contacts.dart';
@@ -76,7 +78,14 @@ class _AddContactScreenState extends State<AddContactScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add  Contact"),
+        title: Text("Add  Contact Page"),
+        actions:<Widget>[
+          IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () {
+                Navigator.pushNamed(context, WelcomeScreen.id);
+              }),
+        ]
       ),
       body: SingleChildScrollView(
         child: Container(
