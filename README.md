@@ -1,6 +1,6 @@
 # flutter_todo
 
-A new Flutter project.
+My first flutter project.
 
 ## Getting Started
 
@@ -29,7 +29,7 @@ To concate the list into a string you can use join()
     return list.join(separator);
   }
 
-
+Date : 11-12-2020 (Learn how to setup firebase for authentication)
   How to Add Firebase Auth Module
 
   1) Create a project in firebase.
@@ -43,5 +43,6 @@ To concate the list into a string you can use join()
   6) Next download the google-services.json file.
   7) Save google-services.json file inside android > app folder
   8) Add proper sdks into respective project level and app level gradel files.
-  9)
+  9)After that add the required packages in yml file.
+  10) Before testing make sure you have allow authentication at the firebase console.
   
