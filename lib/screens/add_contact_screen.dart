@@ -73,23 +73,23 @@ class _AddContactScreenState extends State<AddContactScreen> {
 
   @override
   Widget build(BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text("Add  Contact"),
-          ),
-          body: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Column(
-                children: <Widget>[
-                  Form(
-                    key: _addContactFormKey,
-                    child: Column(children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextFormField(
-                              style: contactFormTextSize,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Add  Contact"),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+          child: Column(
+            children: <Widget>[
+              Form(
+                key: _addContactFormKey,
+                child: Column(children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: TextFormField(
+                          style: contactFormTextSize,
                           decoration: contactTextFieldDecoration.copyWith(
                               labelText: "First Name"),
                           validator: (input) => input.trim().isEmpty
@@ -127,8 +127,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       labelText: "Mobile Number",
                     ),
                     validator: (input) => isValidPhoneNumber(input)
-                        ? 'Please enter a valid number'
-                        : null,
+                        ? null
+                        : 'Please enter a valid number',
                     onSaved: (input) => _phoneNumber = input,
                     initialValue: _phoneNumber,
                     keyboardType: TextInputType.number,
@@ -155,7 +155,6 @@ class _AddContactScreenState extends State<AddContactScreen> {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        flex: 2,
                         child: DropdownButtonFormField(
                           icon: Icon(Icons.arrow_drop_down_circle),
                           iconSize: 22.0,
@@ -197,8 +196,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                             labelText: "Pincode",
                           ),
                           validator: (input) => isValidPincode(input)
-                              ? 'Please enter a valid six digit code'
-                              : null,
+                              ? null
+                              : 'Incorrect pincode',
                           onSaved: (input) => _pincode = input,
                           initialValue: _pincode,
                           keyboardType: TextInputType.number,
@@ -224,6 +223,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                             value: 0,
                             groupValue: _genderCode,
                             onChanged: toggleRadioButton,
+                            autofocus: true,
                           ),
                           Text(
                             'Male',
@@ -371,7 +371,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
     if (string == null || string.isEmpty) {
       return false;
     }
-    const pattern = r'^(?:[+0][1-9])?[0-9]{10,12}$';
+    const pattern = r'^[789]\d{9}$';
     final regExp = RegExp(pattern);
 
     if (!regExp.hasMatch(string)) {
@@ -386,7 +386,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
       return false;
     }
 
-    const pattern = r'^[4]{6}$';
+    const pattern = r'^[1-9][0-9]{5}$';
     final regExp = RegExp(pattern);
 
     if (!regExp.hasMatch(value)) {
@@ -398,7 +398,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
 
   //On Form Submit Function.
   _submit() {
-    if (_addContactFormKey.currentState.validate()) {
+    if (_addContactFormKey.currentState.validate() && _genderCode != null) {
       _addContactFormKey.currentState.save();
       print(
           '$_firstName ,$_lastName , $_phoneNumber, $_address, $_city,$_genderCode,$_date , ${join(_languageList)}');

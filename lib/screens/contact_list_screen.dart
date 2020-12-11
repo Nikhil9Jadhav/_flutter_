@@ -40,7 +40,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
                 fontSize: 18.0,
               ),
             ),
-            subtitle: Text('${contact.gender}'),
+            subtitle: Text('${contact.phNumber}'),
             leading: Icon(Icons.contact_phone),
             tileColor: Theme.of(context).primaryColor,
             trailing: IconButton(
