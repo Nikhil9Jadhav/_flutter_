@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class AddContactScreen extends StatefulWidget {
+  static String id = 'add_contact_screen';
   final Function addContactCallback;
   final Contact userContact;
 
@@ -278,9 +279,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           ),
                           Text(
                             'Hindi',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                            ),
+                            style: contactFormTextSize,
                           ),
                           //English Checkbox
                           Checkbox(
@@ -292,9 +291,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           ),
                           Text(
                             'English',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                            ),
+                            style: contactFormTextSize,
                           )
                         ],
                       )

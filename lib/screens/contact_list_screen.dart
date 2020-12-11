@@ -1,15 +1,20 @@
 import 'package:contact_list_app/helpers/database_helper.dart';
 import 'package:contact_list_app/models/contacts.dart';
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'add_contact_screen.dart';
 
 class ContactListScreen extends StatefulWidget {
+  static String id = 'contact_list_screen';
+
   @override
   _ContactListScreenState createState() => _ContactListScreenState();
 }
 
 class _ContactListScreenState extends State<ContactListScreen> {
+  final _auth = auth.FirebaseAuth.instance;
+  auth.User loggedInUser;
+
   // Contact List
   Future<List<Contact>> _contactList;
 
@@ -19,7 +24,21 @@ class _ContactListScreenState extends State<ContactListScreen> {
   @override
   void initState() {
     super.initState();
+    getCurrentUser();
     _refreshContactList();
+  }
+
+  //Check if the logged in user exist
+  void getCurrentUser() {
+    final user = _auth.currentUser;
+    try {
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser.email);
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   void _refreshContactList() {
