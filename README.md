@@ -1,7 +1,7 @@
-# flutter_todo
+# contact_list_app
 
 My first flutter project.
-
+(Note the original name and package name of this project is different, as the original name of this project was changed from flutter_todo to contact_list_app)
 ## Getting Started
 
 This project is a starting point for a Flutter application.
